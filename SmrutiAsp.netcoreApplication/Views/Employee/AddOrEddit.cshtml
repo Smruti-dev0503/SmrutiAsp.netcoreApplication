@@ -1,0 +1,105 @@
+﻿@model SmrutiAsp.netcoreApplication.ViewModel.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "AddOrEddit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<h1>Create Employee</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEddit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Employee Name</label>
+                <input asp-for="Employee_Name" class="form-control" />
+                <span asp-validation-for="Employee_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date of Birth</label>
+                <input asp-for="DOB" class="form-control datepicker" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Qualification_Id" class="control-label"></label>
+                <select asp-for="Qualification_Id"
+                        class="form-control"
+                        asp-items="@(new SelectList(@ViewBag.QualificationList,"Qualification_Id", "Qualification_Name"))">
+                </select>
+                @*<input asp-for="Qualification" class="form-control" />*@
+                <span asp-validation-for="Qualification_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Experience" class="control-label"></label>
+                <input asp-for="Experience" class="form-control" />
+                <span asp-validation-for="Experience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Joining_Date" class="control-label"></label>
+                <input asp-for="Joining_Date" class="form-control" />
+                <span asp-validation-for="Joining_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salary" class="control-label"></label>
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation" class="control-label"></label>
+                <input asp-for="Designation" class="form-control" />
+                <span asp-validation-for="Designation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                @{ 
+                    for(int i = 0;  i < Model.Hobbies.Count(); i++)
+                    {
+                        <input asp-for="@Model.Hobbies[i].IsSelected" type="checkbox" />
+                        <label asp-for="@Model.Hobbies[i].HobbyName"> @Model.Hobbies[i].HobbyName</label>
+                        <input asp-for="@Model.Hobbies[i].HobbyName" type="hidden" />
+                    }
+
+                }
+               
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        assignDatePicker('.datepicker', 'dd M yyyy');
+
+    });
+
+    function assignDatePicker(ctrl, format) {
+        debugger;
+        if (format == undefined || format == "") {
+            format = 'dd MMM yyyy';
+            //alert(format)
+        }
+        //console.log("function called- with format");
+        $(ctrl)
+            .datepicker({
+                format: format,
+                autoclose: true,
+                startDate: new Date(1999, 10 - 1, 25)
+            });
+    }
+
+
+</script>
+

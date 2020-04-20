@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SmrutiAsp.netcoreApplication.ViewModel.EmployeeViewModel>
+
+@{
+    ViewData["Title"] = "GetEmployeeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var model = Model;
+}
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<h1>Employee List</h1>
+<div class="col-md-4 text-center ">
+    @*<button class="btn btn-info" data-ajax="true" data-ajax-mode="replace" asp-controller="Employee" asp-action="ExportToExcel" >Export To Excel</button>*@
+    <a class="btn btn-block mybtn btn-primary tx-tfm" data-ajax="true" data-ajax-mode="replace" asp-area="" asp-controller="Employee" asp-action="ExportToExcel">Export to Excel</a>
+</div>
+    <table class="table" id="EmployeeTable">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayName("Employee Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Date of Birth")
+                </th>
+                <th>
+                    @Html.DisplayName("Qualification")
+                </th>
+                <th>
+                    @Html.DisplayName("Experience")
+                </th>
+                <th>
+                    @Html.DisplayName("Joining_Date")
+                </th>
+                <th>
+                    @Html.DisplayName("Salary")
+                </th>
+                <th>
+                    @Html.DisplayName("Designation")
+                </th>
+                <th>
+                    @Html.DisplayName("Hobbies")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qualification)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Experience)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Joining_Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Salary)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Designation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hobbiesList)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            oTable = $('#EmployeeTable').dataTable(
+                {
+
+                });
+
+        });
+
+
+    </script>
